@@ -161,44 +161,43 @@
         return m;
     };
 
-    var botCreator = "Matthew aka. Yemasthui";
+    var botCreator = "Dctr";
     var botCreatorIDs = [];
 
     var basicBot = {
-        version: "2.1.3",
+        version: "2.0",
         status: false,
-        name: "basicBot",
+        name: "MineplexBot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/Yemasthui/basicBot/master/basicBot.js",
+        scriptLink: "https://rawgit.com/Dctr/basicBot/master/basicBot.js",
         cmdLink: "http://git.io/245Ppg",
-        chatLink: "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
+        chatLink: "https://rawgit.com/Dctr/basicBot/master/lang/en.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
         settings: {
-            botName: "basicBot",
+            botName: "MineplexBot",
             language: "english",
-            chatLink: "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
+            chatLink: "https://rawgit.com/Dctr/basicBot/master/lang/en.json",
             maximumAfk: 120,
-            afkRemoval: true,
+            afkRemoval: false,
             maximumDc: 60,
-            bouncerPlus: true,
+            bouncerPlus: false,
             lockdownEnabled: false,
             lockGuard: false,
-            maximumLocktime: 10,
+            maximumLocktime: 6,
             cycleGuard: true,
             maximumCycletime: 10,
             timeGuard: true,
-            maximumSongLength: 10,
+            maximumSongLength: 6,
             autodisable: true,
-            commandCooldown: 30,
+            commandCooldown: 5,
             usercommandsEnabled: true,
-            lockskipPosition: 3,
+            lockskipPosition: 5,
             lockskipReasons: [
                 ["theme", "This song does not fit the room theme. "],
                 ["op", "This song is on the OP list. "],
                 ["history", "This song is in the history. "],
-                ["mix", "You played a mix, which is against the rules. "],
                 ["sound", "The song you played had bad sound quality or no sound. "],
                 ["nsfw", "The song you contained was NSFW (image or sound). "],
                 ["unavailable", "The song you played was not available for some users. "]
@@ -207,23 +206,23 @@
             afkRankCheck: "ambassador",
             motdEnabled: false,
             motdInterval: 5,
-            motd: "Temporary Message of the Day",
+            motd: "Welcome to the Mineplex official plug.dj. Remember to read the rules in the community description!",
             filterChat: true,
             etaRestriction: false,
-            welcome: true,
-            opLink: null,
-            rulesLink: null,
+            welcome: false,
+            opLink: "https://github.com/Dctr-/Plug-OP-list/blob/master/List",
+            rulesLink: "http://www.mineplex.com/forums/m/11929946/viewthread/10411102-mineplex-official-plugdj",
             themeLink: null,
             fbLink: null,
-            youtubeLink: null,
-            website: null,
+            youtubeLink: "https://www.youtube.com/user/MineplexOfficial",
+            website: "http://www.Mineplex.com",
             intervalMessages: [],
             messageInterval: 5,
             songstats: true,
             commandLiteral: "!",
             blacklists: {
-                NSFW: "https://rawgit.com/Yemasthui/basicBot-customization/master/blacklists/ExampleNSFWlist.json",
-                OP: "https://rawgit.com/Yemasthui/basicBot-customization/master/blacklists/ExampleOPlist.json"
+                NSFW: "https://rawgit.com/Dctr/basicBot-customization/master/blacklists/ExampleNSFWlist.json",
+                OP: "https://rawgit.com/Dctr/basicBot-customization/master/blacklists/ExampleOPlist.json"
             }
         },
         room: {
