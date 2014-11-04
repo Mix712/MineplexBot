@@ -170,7 +170,7 @@
         name: "MineplexBot",
         loggedInID: null,
         scriptLink: "https://rawgit.com/Dctr/basicBot/master/basicBot.js",
-        cmdLink: "http://git.io/245Ppg",
+        cmdLink: "http://git.io/loh0_w",
         chatLink: "https://rawgit.com/Dctr/basicBot/master/lang/en.json",
         chat: null,
         loadChat: loadChat,
