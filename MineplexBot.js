@@ -2258,7 +2258,7 @@
 
             pingCommand: {
                 command: 'ping',
-                rank: 'user',
+                rank: 'BA',
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
