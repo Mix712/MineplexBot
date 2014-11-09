@@ -910,7 +910,7 @@
                 API.sendChat(subChat(basicBot.chat.askskip, {name: chat.un}));
                 return true;
             }
-            if (msg.contains('eta') and !msg.contains('!eta')) {
+            if (msg.contains('eta') && !(msg.contains('!eta'))) {
                 API.sendChat(subChat(basicBot.chat.asketa, {name: chat.un}));
                 return true;
             }
