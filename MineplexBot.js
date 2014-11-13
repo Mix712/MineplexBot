@@ -1433,6 +1433,51 @@
                 }
             },
 
+            tempbanCommand: {
+                command: 'tempban',
+                rank: 'residentdj',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+                        if (msg.length === cmd.length) return API.sendChat(subChat(basicBot.chat.nouserspecified, {name: chat.un}));
+                        var name = msg.substr(cmd.length + 2);
+                        var user = basicBot.userUtilities.lookupUserName(name);
+                        if (typeof user === 'boolean') return API.sendChat(subChat(basicBot.chat.invaliduserspecified, {name: chat.un}));
+                        API.moderateBanUser(user.id, 1, API.BAN.HOUR);
+                    }
+                }
+            },
+
+            tempmuteCommand: {
+                command: 'tempmute',
+                rank: 'residentdj',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length)
+                                                return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) {
+                                                return void (0);
+                    } else {
+                        var msg = chat.message;
+                        if (msg.length === cmd.length) return API.sendChat(subChat(basicBot.chat.nouserspecified, {name: chat.un}));
+                        var name = msg.substr(cmd.length + 2);
+                        var user = basicBot.userUtilities.lookupUserName(name);
+                        if (typeof user === 'boolean') {
+                                                        return API.sendChat(subChat(basicBot.chat.invaliduserspecified, {name: chat.un}));
+                                                } else {
+                                                        API.moderateMuteUser(user.id, 1, API.MUTE.SHORT);
+                                                        API.sendChat(subChat(basicBot.chat.mutedtime, {name: chat.un, username: name, time: time}));
+                                                        setTimeout(function (id) {
+                                                                API.moderateUnmuteUser(id);
+                                                        }, time * 60 * 1000, user.id);
+                                                }
+                                        }
+                }
+            },
+
             blacklistCommand: {
                 command: ['blacklist', 'bl'],
                 rank: 'bouncer',
