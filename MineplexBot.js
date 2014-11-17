@@ -193,7 +193,7 @@
             autodisable: true,
             commandCooldown: 1,
             usercommandsEnabled: true,
-            lockskipPosition: 5,
+            lockskipPosition: 15,
             lockskipReasons: [
                 ["theme", "This song does not fit the room theme. "],
                 ["op", "This song is on the OP list. "],
@@ -2442,8 +2442,8 @@
                 }
             },
 
-            skipCommand: {
-                command: 'skip',
+            forceskipCommand: {
+                command: 'forceskip',
                 rank: 'residentdj',
                 type: 'exact',
                 functionality: function (chat, cmd) {
@@ -2457,6 +2457,75 @@
                             basicBot.room.skippable = true
                         }, 5 * 1000);
 
+                    }
+                }
+            },
+
+            skipCommand: {
+                command: 'skip',
+                rank: 'residentdj',
+                type: 'startsWith',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        if (basicBot.room.skippable) {
+                            var dj = API.getDJ();
+                            var id = dj.id;
+                            var name = dj.username;
+                            var msgSend = '@' + name + ': ';
+                            basicBot.room.queueable = false;
+
+                            if (chat.message.length === cmd.length) {
+                                API.sendChat(subChat(basicBot.chat.usedlockskip, {name: chat.un}));
+                                basicBot.roomUtilities.booth.lockBooth();
+                                setTimeout(function (id) {
+                                    API.moderateForceSkip();
+                                    basicBot.room.skippable = false;
+                                    setTimeout(function () {
+                                        basicBot.room.skippable = true
+                                    }, 5 * 1000);
+                                    setTimeout(function (id) {
+                                        basicBot.userUtilities.moveUser(id, basicBot.settings.lockskipPosition, false);
+                                        basicBot.room.queueable = true;
+                                        setTimeout(function () {
+                                            basicBot.roomUtilities.booth.unlockBooth();
+                                        }, 1000);
+                                    }, 1500, id);
+                                }, 1000, id);
+                                return void (0);
+                            }
+                            var validReason = false;
+                            var msg = chat.message;
+                            var reason = msg.substring(cmd.length + 1);
+                            for (var i = 0; i < basicBot.settings.lockskipReasons.length; i++) {
+                                var r = basicBot.settings.lockskipReasons[i][0];
+                                if (reason.indexOf(r) !== -1) {
+                                    validReason = true;
+                                    msgSend += basicBot.settings.lockskipReasons[i][1];
+                                }
+                            }
+                            if (validReason) {
+                                API.sendChat(subChat(basicBot.chat.usedlockskip, {name: chat.un}));
+                                basicBot.roomUtilities.booth.lockBooth();
+                                setTimeout(function (id) {
+                                    API.moderateForceSkip();
+                                    basicBot.room.skippable = false;
+                                    API.sendChat(msgSend);
+                                    setTimeout(function () {
+                                        basicBot.room.skippable = true
+                                    }, 5 * 1000);
+                                    setTimeout(function (id) {
+                                        basicBot.userUtilities.moveUser(id, basicBot.settings.lockskipPosition, false);
+                                        basicBot.room.queueable = true;
+                                        setTimeout(function () {
+                                            basicBot.roomUtilities.booth.unlockBooth();
+                                        }, 1000);
+                                    }, 1500, id);
+                                }, 1000, id);
+                                return void (0);
+                            }
+                        }
                     }
                 }
             },
