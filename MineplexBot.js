@@ -178,7 +178,7 @@
     var botCreatorIDs = [];
 
     var basicBot = {
-        version: "2.2",
+        version: "2.3",
         status: false,
         name: "MineplexBot",
         loggedInID: null,
