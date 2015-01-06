@@ -174,7 +174,7 @@
         return m;
     };
 
-    var botCreator = "Dctr";
+    var botCreator = "Mix712";
     var botCreatorIDs = [];
 
     var basicBot = {
@@ -189,7 +189,7 @@
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
         settings: {
-            botName: "MineplexBot",
+            botName: "Mix712",
             language: "english",
             chatLink: "https://rawgit.com/Dctr/basicBot/master/lang/en.json",
             maximumAfk: 120,
